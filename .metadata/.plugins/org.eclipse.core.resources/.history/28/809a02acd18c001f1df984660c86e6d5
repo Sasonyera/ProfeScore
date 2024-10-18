@@ -1,0 +1,18 @@
+@Entity
+@Table(name = "profesor")
+public class Profesor {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+
+    @Column(name = "programa_id")
+    private Long programaId;
+
+    @Column(name = "fecha_ingreso")
+    private LocalDate fechaIngreso;
+
+    // Getters y Setters
+}

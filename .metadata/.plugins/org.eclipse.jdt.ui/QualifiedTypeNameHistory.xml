@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.example.demo.Servicios.ExcelService"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entidades.Dato"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.DatoRepository"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.ProgramaRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entidades.Materia"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.MateriaRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entidades.Calificacion"/>
+    <fullyQualifiedTypeName name="com.example.demo.Repository.ProfesorRepository"/>
+    <fullyQualifiedTypeName name="com.example.demo.Servicios.ProgramaService"/>
+    <fullyQualifiedTypeName name="com.example.demo.Servicios.ProfesorService"/>
+    <fullyQualifiedTypeName name="com.example.demo.Entidades.Profesor"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+</qualifiedTypeNameHistroy>

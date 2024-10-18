@@ -1,0 +1,19 @@
+@Entity
+public class Calificacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Long profesorId;
+    private Long materiaId;
+    private Long programaId;
+    private String periodo;
+    private Double notaEstudiante;
+    private Double notaDirector;
+    private Double notaAutoevaluacion;
+    private Double notaDefinitiva;
+    private LocalDateTime fechaRegistro;
+
+    // Getters y Setters
+}

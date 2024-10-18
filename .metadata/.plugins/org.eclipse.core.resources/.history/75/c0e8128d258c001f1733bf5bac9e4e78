@@ -1,0 +1,126 @@
+package com.example.demo.Servicios;
+
+import org.apache.poi.ss.usermodel.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.example.demo.Entidades.Dato;
+import com.example.demo.Repository.DatoRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.io.InputStream;
+import java.util.Iterator;
+
+@Service
+public class ExcelService {
+
+    @Autowired
+    private DatoRepository datoRepository;
+
+    public String processExcel(MultipartFile file) {
+        try (InputStream is = file.getInputStream()) {
+            Workbook workbook = WorkbookFactory.create(is);
+            Sheet sheet = workbook.getSheetAt(0);
+
+            Iterator<Row> rows = sheet.iterator();
+            int rowNumber = 0;
+            while (rows.hasNext()) {
+                Row currentRow = rows.next();
+
+                // Saltar la fila de encabezados
+                if (rowNumber == 0) {
+                    rowNumber++;
+                    continue;
+                }
+
+                Dato dato = new Dato();
+
+                // Validación de que no hay celdas vacías
+                for (int cn = 0; cn < 10; cn++) { // Asumiendo 10 columnas
+                    Cell cell = currentRow.getCell(cn, Row.MissingCellPolicy.RETURN_BLANK_AS_NULL);
+                    if (cell == null) {
+                        return "Hay datos faltantes en la fila " + (rowNumber + 1) + ".";
+                    }
+                }
+
+                // Obtener y asignar los valores
+                dato.setNombre(getCellValueAsString(currentRow.getCell(0)));
+                dato.setPrograma(getCellValueAsString(currentRow.getCell(1)));
+                dato.setMateria(getCellValueAsString(currentRow.getCell(2)));
+                dato.setCodigo(getCellValueAsString(currentRow.getCell(3)));
+                dato.setGrupo(getCellValueAsString(currentRow.getCell(4)));
+                dato.setNotaEstudiante(getCellValueAsDouble(currentRow.getCell(5)));
+                dato.setNotaDirector(getCellValueAsDouble(currentRow.getCell(6)));
+                dato.setAutoevaluacion(getCellValueAsDouble(currentRow.getCell(7)));
+                dato.setDefinitiva(getCellValueAsDouble(currentRow.getCell(8)));
+                dato.setPeriodo(getCellValueAsString(currentRow.getCell(9)));
+
+                System.out.println(dato.getNombre());
+                System.out.println(dato.getPrograma());
+                System.out.println(dato.getMateria());
+                System.out.println(dato.getCodigo());
+                System.out.println(dato.getGrupo());
+                System.out.println(dato.getNotaEstudiante());
+                System.out.println(dato.getNotaDirector());
+                System.out.println(dato.getAutoevaluacion());
+                System.out.println(dato.getDefinitiva());
+                // Verificar que los campos requeridos no estén vacíos
+                if (dato.getNombre() == null || dato.getPrograma() == null || dato.getMateria() == null ||
+                    dato.getCodigo() == null || dato.getGrupo() == null || dato.getPeriodo() == null ||
+                    dato.getNotaEstudiante() == null || dato.getNotaDirector() == null ||
+                    dato.getAutoevaluacion() == null || dato.getDefinitiva() == null) {
+                    return "Hay datos faltantes en la fila " + (rowNumber + 1) + ".";
+                }
+
+                datoRepository.save(dato);
+                rowNumber++;
+            }
+
+            workbook.close();
+            return "success";
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Error al procesar el archivo.";
+        }
+    }
+
+    private String getCellValueAsString(Cell cell) {
+        if (cell == null) {
+            return null;
+        }
+        switch (cell.getCellType()) {
+            case STRING:
+                return cell.getStringCellValue();
+            case NUMERIC:
+                return String.valueOf(cell.getNumericCellValue());
+            case BOOLEAN:
+                return String.valueOf(cell.getBooleanCellValue());
+            case FORMULA:
+                return cell.getCellFormula();
+            case BLANK:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    private Double getCellValueAsDouble(Cell cell) {
+        if (cell == null) {
+            return null;
+        }
+        if (cell.getCellType() == CellType.NUMERIC) {
+            return cell.getNumericCellValue();
+        } else if (cell.getCellType() == CellType.STRING) {
+            try {
+                return Double.parseDouble(cell.getStringCellValue());
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
+}

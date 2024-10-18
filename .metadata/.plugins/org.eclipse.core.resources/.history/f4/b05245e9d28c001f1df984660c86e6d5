@@ -1,0 +1,5 @@
+package com.example.demo.Repository;
+import com.example.demo.Entidades.Calificacion;
+public interface CalificacionRepository extends JpaRepository<Calificacion, Long> {
+    // Métodos adicionales si es necesario
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Calificaciones</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Tabla de Calificaciones</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Profesor</th>
+                    <th>Materia</th>
+                    <th>Programa</th>
+                    <th>Calificación</th>
+                    <th>Fecha</th>
+                    <!-- Agrega más columnas si es necesario -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="calificacion : ${calificaciones}">
+                    <td th:text="${calificacion.id}"></td>
+                    <td th:text="${calificacion.profesor_id}"></td>
+                    <td th:text="${calificacion.materia_id}"></td>
+                    <td th:text="${calificacion.programa_id}"></td>
+                    <td th:text="${calificacion.notaDefinitiva}"></td>
+                    <td th:text="${calificacion.fecha}"></td>
+                    <!-- Agrega más celdas si es necesario -->
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a href="/" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</body>
+</html>

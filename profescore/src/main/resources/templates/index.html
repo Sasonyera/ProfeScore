@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<link rel="icon" href="/favi1.png" type="image/png">
+    <meta charset="UTF-8">
+    <title>ProfeScore</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+	<link rel="stylesheet" href="/styles.css">
+
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <h1 class="text-center title">ProfeScore</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+                <div class="button-group text-center mb-3">
+                    <button id="downloadTemplate" class="btn btn-custom">Descargar Plantilla de Excel</button>
+                </div>
+                <form id="uploadForm">
+                    <div class="form-group file-upload" id="fileDropArea">
+                        <label for="excelFile">Arrastra y suelta tu archivo aquí o haz clic para seleccionar uno.</label>
+                        <input type="file" id="excelFile" name="file" accept=".xlsx, .xls" onchange="updateFileName()">
+                        <div id="fileName" class="file-name"></div>
+                    </div>
+                    <button type="submit" class="btn btn-custom" id="btnEnviar">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar mensajes -->
+    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="responseModalLabel"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="responseMessage"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	<div class="container mt-5 mb-5">
+	        <!-- ... -->
+			<div class="text-center mt-4">
+			    <a href="/ver-datos" class="btn btn-custom">Ver Datos</a>
+			</div>
+
+	    </div>
+
+    <!-- Scripts necesarios -->
+    <!-- Versión completa de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Popper.js y Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>    
+    <!-- Tu archivo script.js -->
+    <script src="script.js"></script>
+</body>
+</html>

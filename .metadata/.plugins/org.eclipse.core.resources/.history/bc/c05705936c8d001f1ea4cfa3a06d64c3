@@ -1,0 +1,95 @@
+// Esperar a que el documento esté listo
+$(document).ready(function() {
+
+    // Manejar el clic en el botón de descarga de la plantilla
+    $('#downloadTemplate').on('click', function() {
+        // Redirigir al usuario para descargar el archivo de plantilla
+        window.location.href = '/excel/download';
+    });
+
+    // Referencias a los elementos del DOM
+    var fileInput = $('#excelFile');
+    var fileDropArea = $('#fileDropArea');
+    var fileNameDisplay = $('#fileName');
+
+    // Función para actualizar el nombre del archivo seleccionado
+    function updateFileName() {
+        var file = fileInput[0].files[0];
+        if (file) {
+            fileNameDisplay.text('Archivo seleccionado: ' + file.name);
+        } else {
+            fileNameDisplay.text('');
+        }
+    }
+
+    // Evento al cambiar el archivo en el input
+    fileInput.on('change', function() {
+        updateFileName();
+    });
+
+    // Eventos para arrastrar y soltar archivos en el área de carga
+    fileDropArea.on('dragenter dragover', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropArea.addClass('dragging');
+    });
+
+    fileDropArea.on('dragleave', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropArea.removeClass('dragging');
+    });
+
+    fileDropArea.on('drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileDropArea.removeClass('dragging');
+
+        var files = e.originalEvent.dataTransfer.files;
+        if (files.length > 0) {
+            // Asignar el archivo al input de tipo file
+            fileInput[0].files = files;
+            updateFileName();
+        }
+    });
+
+    // Permitir hacer clic en el área de carga para abrir el diálogo de selección de archivos
+    fileDropArea.on('click', function() {
+        fileInput.click();
+    });
+
+    // Manejar el envío del formulario
+    $('#uploadForm').on('submit', function(e) {
+        e.preventDefault();
+
+        var file = fileInput[0].files[0];
+        if (!file) {
+            alert('Por favor, selecciona un archivo.');
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append('file', file);
+
+        // Enviar el archivo al servidor mediante AJAX
+        $.ajax({
+            url: '/excel/upload',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Mostrar mensaje de éxito en el modal
+                $('#responseModalLabel').text('Éxito');
+                $('#responseMessage').text(response);
+                $('#responseModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                // Mostrar mensaje de error en el modal
+                $('#responseModalLabel').text('Error');
+                $('#responseMessage').text('Ocurrió un error al subir el archivo.');
+                $('#responseModal').modal('show');
+            }
+        });
+    });
+});

@@ -1,0 +1,3 @@
+public interface CalificacionRepository extends JpaRepository<Calificacion, Long> {
+    // Métodos adicionales si es necesario
+}

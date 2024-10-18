@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Calificaciones</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- Incluye el archivo de estilos personalizado -->
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center title">Tabla de Calificaciones</h2>
+        <table class="table custom-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Profesor</th>
+                    <th>Materia</th>
+                    <th>Programa</th>
+                    <th>Calificación</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+				<td th:text="${calificacion.id}"></td>
+				                    <td th:text="${calificacion.profesor_id}"></td>
+				                    <td th:text="${calificacion.materia_id}"></td>
+				                    <td th:text="${calificacion.programa_id}"></td>
+				                    <td th:text="${calificacion.nota_definitiva}"></td>
+				                    <td th:text="${calificacion.fecha_registro}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <a href="/" class="btn btn-custom">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <!-- Scripts necesarios -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Popper.js y Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>  
+</body>
+</html>

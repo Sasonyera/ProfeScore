@@ -1,0 +1,29 @@
+package com.example.demo.Entidades;
+
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Dato {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+    private String programa;
+    private String materia;
+    private String codigo;
+    private String grupo;
+    private Double notaEstudiante;
+    private Double notaDirector;
+    private Double autoevaluacion;
+    private Double definitiva;
+    private String periodo;
+
+    // Getters y Setters
+    // ...
+}

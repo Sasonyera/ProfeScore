@@ -1,0 +1,89 @@
+package com.example.demo.Entidades;
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Calificacion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int profesorId;
+    private int materiaId;
+    private int programaId;
+    private String periodo;
+    private Double notaEstudiante;
+    private Double notaDirector;
+    private Double notaAutoevaluacion;
+    private Double notaDefinitiva;
+    private LocalDateTime fechaRegistro;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Long getProfesorId() {
+		return profesorId;
+	}
+	public void setProfesorId(Long profesorId) {
+		this.profesorId = profesorId;
+	}
+	public Long getMateriaId() {
+		return materiaId;
+	}
+	public void setMateriaId(Long materiaId) {
+		this.materiaId = materiaId;
+	}
+	public Long getProgramaId() {
+		return programaId;
+	}
+	public void setProgramaId(Long programaId) {
+		this.programaId = programaId;
+	}
+	public String getPeriodo() {
+		return periodo;
+	}
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+	public Double getNotaEstudiante() {
+		return notaEstudiante;
+	}
+	public void setNotaEstudiante(Double notaEstudiante) {
+		this.notaEstudiante = notaEstudiante;
+	}
+	public Double getNotaDirector() {
+		return notaDirector;
+	}
+	public void setNotaDirector(Double notaDirector) {
+		this.notaDirector = notaDirector;
+	}
+	public Double getNotaAutoevaluacion() {
+		return notaAutoevaluacion;
+	}
+	public void setNotaAutoevaluacion(Double notaAutoevaluacion) {
+		this.notaAutoevaluacion = notaAutoevaluacion;
+	}
+	public Double getNotaDefinitiva() {
+		return notaDefinitiva;
+	}
+	public void setNotaDefinitiva(Double notaDefinitiva) {
+		this.notaDefinitiva = notaDefinitiva;
+	}
+	public LocalDateTime getFechaRegistro() {
+		return fechaRegistro;
+	}
+	public void setFechaRegistro(LocalDateTime fechaRegistro) {
+		this.fechaRegistro = fechaRegistro;
+	}
+
+    // Getters y Setters
+    
+}

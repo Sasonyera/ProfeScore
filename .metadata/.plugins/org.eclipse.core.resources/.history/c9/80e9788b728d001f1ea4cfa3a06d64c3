@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<link rel="icon" href="/src/main/resources/static/favi1.png" type="image/png">
+    <meta charset="UTF-8">
+    <title>ProfeScore</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .button-group {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .file-upload {
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .file-upload.dragging {
+            border-color: #28a745;
+            background-color: #f8f9fa;
+        }
+        .file-upload label {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .file-upload input {
+            display: none;
+        }
+        .file-name {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-custom {
+            background: linear-gradient(90deg, #007bff, #28a745);
+            color: white;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: background 0.3s;
+            margin: 0 auto;
+            display: block;
+            width: fit-content;
+        }
+        .btn-custom:hover {
+            background: linear-gradient(90deg, #0056b3, #218838);
+        }
+        .title {
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #007bff, #28a745);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <h1 class="text-center title">ProfeScore</h1>
+        <div class="row justify-content-center">
+            <div class="col-md-6 form-container">
+                <div class="button-group text-center mb-3">
+                    <button id="downloadTemplate" class="btn btn-custom">Descargar Plantilla de Excel</button>
+                </div>
+                <form id="uploadForm">
+                    <div class="form-group file-upload" id="fileDropArea">
+                        <label for="excelFile">Arrastra y suelta tu archivo aquí o haz clic para seleccionar uno.</label>
+                        <input type="file" id="excelFile" name="file" accept=".xlsx, .xls" onchange="updateFileName()">
+                        <div id="fileName" class="file-name"></div>
+                    </div>
+                    <button type="submit" class="btn btn-custom">Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar mensajes -->
+    <div class="modal fade" id="responseModal" tabindex="-1" role="dialog" aria-labelledby="responseModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="responseModalLabel"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="responseMessage"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts necesarios -->
+    <!-- Versión completa de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Popper.js y Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>    
+    <!-- Tu archivo script.js -->
+    <script src="script.js"></script>
+</body>
+</html>

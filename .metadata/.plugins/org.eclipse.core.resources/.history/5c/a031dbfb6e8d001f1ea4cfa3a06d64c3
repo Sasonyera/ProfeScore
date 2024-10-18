@@ -1,0 +1,40 @@
+document.getElementById('downloadTemplate').addEventListener('click', function() {
+    window.location.href = '/download-template';
+});
+
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var fileInput = document.getElementById('excelFile');
+    var file = fileInput.files[0];
+
+    if (!file) {
+        showModal('Fallo el Envío', 'Por favor, selecciona un archivo.');
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('file', file);
+
+    fetch('/upload-excel', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === 'success') {
+            showModal('Envío Correcto', 'El archivo se ha enviado correctamente.');
+        } else {
+            showModal('Fallo el Envío', data);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showModal('Fallo el Envío', 'Ocurrió un error al enviar el archivo.');
+    });
+});
+
+function showModal(title, message) {
+    document.getElementById('responseModalLabel').innerText = title;
+    document.getElementById('responseMessage').innerText = message;
+    $('#responseModal').modal('show');
+}

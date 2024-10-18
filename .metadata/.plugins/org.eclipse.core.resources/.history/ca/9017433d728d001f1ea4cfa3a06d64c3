@@ -1,0 +1,21 @@
+// Importaciones necesarias
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
+
+// Anotación para indicar que es un controlador
+@Controller
+public class CalificacionController {
+
+    @Autowired
+    private CalificacionService calificacionService;
+
+    @GetMapping("/ver-datos")
+    public String verDatos(Model model) {
+        List<Calificacion> calificaciones = calificacionService.obtenerTodasLasCalificaciones();
+        model.addAttribute("calificaciones", calificaciones);
+        return "tabla-calificaciones";
+    }
+}

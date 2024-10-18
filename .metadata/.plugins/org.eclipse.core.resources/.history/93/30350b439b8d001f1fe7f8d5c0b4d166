@@ -1,0 +1,96 @@
+package com.example.demo.Entidades;
+
+
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Dato {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+    private String programa;
+    private String materia;
+    private String codigo;
+    private String grupo;
+    private Double notaEstudiante;
+    private Double notaDirector;
+    private Double autoevaluacion;
+    private Double definitiva;
+    private String periodo;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getPrograma() {
+		return programa;
+	}
+	public void setPrograma(String programa) {
+		this.programa = programa;
+	}
+	public String getMateria() {
+		return materia;
+	}
+	public void setMateria(String materia) {
+		this.materia = materia;
+	}
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+	public String getGrupo() {
+		return grupo;
+	}
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
+	}
+	public Double getNotaEstudiante() {
+		return notaEstudiante;
+	}
+	public void setNotaEstudiante(Double notaEstudiante) {
+		this.notaEstudiante = notaEstudiante;
+	}
+	public Double getNotaDirector() {
+		return notaDirector;
+	}
+	public void setNotaDirector(Double notaDirector) {
+		this.notaDirector = notaDirector;
+	}
+	public Double getAutoevaluacion() {
+		return autoevaluacion;
+	}
+	public void setAutoevaluacion(Double autoevaluacion) {
+		this.autoevaluacion = autoevaluacion;
+	}
+	public Double getDefinitiva() {
+		return definitiva;
+	}
+	public void setDefinitiva(Double definitiva) {
+		this.definitiva = definitiva;
+	}
+	public String getPeriodo() {
+		return periodo;
+	}
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+    
+    // Getters y Setters
+    // ...
+}

@@ -1,0 +1,92 @@
+// Manejar el clic en el botón de descarga de la plantilla
+document.getElementById('downloadTemplate').addEventListener('click', function() {
+    window.location.href = '/download-template';
+});
+
+// Mostrar el nombre del archivo seleccionado
+function updateFileName() {
+    const input = document.getElementById('excelFile');
+    const fileNameDisplay = document.getElementById('fileName');
+    const fileName = input.files.length > 0 ? input.files[0].name : '';
+    fileNameDisplay.textContent = fileName ? `Archivo seleccionado: ${fileName}` : '';
+}
+
+// Lógica de arrastrar y soltar archivos
+const dropArea = document.getElementById('fileDropArea');
+
+dropArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropArea.classList.add('dragging');
+});
+
+dropArea.addEventListener('dragleave', () => {
+    dropArea.classList.remove('dragging');
+});
+
+dropArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropArea.classList.remove('dragging');
+
+    const input = document.getElementById('excelFile');
+    const file = e.dataTransfer.files[0];
+
+    if (file && (file.name.endsWith(".xls") || file.name.endsWith(".xlsx"))) {
+        input.files = e.dataTransfer.files;
+        updateFileName();
+    } else {
+        alert('Por favor, sube un archivo Excel válido (.xls o .xlsx).');
+    }
+});
+
+// Permitir hacer clic en el área de carga para abrir el diálogo de selección de archivos
+dropArea.addEventListener('click', () => {
+    document.getElementById('excelFile').click();
+});
+
+// Envío del formulario usando fetch
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const inputFile = document.getElementById('excelFile');
+
+    if (inputFile.files.length === 0) {
+        showModal('Fallo el Envío', 'Por favor, selecciona un archivo.');
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', inputFile.files[0]);
+
+    fetch('/upload-excel', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === 'success') {
+            showModal('Envío Correcto', 'El archivo se ha enviado correctamente.');
+			setTimeout(function() {
+			    location.reload();
+			}, 2000);
+        } else {
+            showModal('Fallo el Envío', data);
+			setTimeout(function() {
+			    location.reload();
+			}, 2000);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showModal('Fallo el Envío', 'Ocurrió un error al enviar el archivo.');
+		setTimeout(function() {
+		    location.reload();
+		}, 2000);
+    });
+});
+
+// Función para mostrar el modal con mensajes
+function showModal(title, message) {
+    document.getElementById('responseModalLabel').innerText = title;
+    document.getElementById('responseMessage').innerText = message;
+    $('#responseModal').modal('show');
+}

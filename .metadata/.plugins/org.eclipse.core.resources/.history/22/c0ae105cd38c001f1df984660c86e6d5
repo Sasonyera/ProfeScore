@@ -1,0 +1,22 @@
+package com.example.demo.Servicios;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProfesorService {
+
+    @Autowired
+    private ProfesorRepository profesorRepository;
+
+    public Long obtenerProfesorIdPorNombre(String nombre) {
+        Profesor profesor = profesorRepository.findByNombre(nombre);
+        if (profesor != null) {
+            return profesor.getId();
+        } else {
+            Profesor nuevoProfesor = new Profesor();
+            nuevoProfesor.setNombre(nombre);
+            profesorRepository.save(nuevoProfesor);
+            return nuevoProfesor.getId();
+        }
+    }
+}

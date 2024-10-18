@@ -1,0 +1,7 @@
+package com.example.demo.Repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.profescore.model.Dato;
+
+public interface DatoRepository extends JpaRepository<Dato, Long> {
+}

@@ -1,0 +1,74 @@
+document.getElementById('downloadTemplate').addEventListener('click', function() {
+    window.location.href = '/download-template';
+});
+
+document.getElementById('uploadForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var fileInput = document.getElementById('excelFile');
+    var file = fileInput.files[0];
+
+    if (!file) {
+        showModal('Fallo el Envío', 'Por favor, selecciona un archivo.');
+        return;
+    }
+
+    var formData = new FormData();
+    formData.append('file', file);
+
+    fetch('/upload-excel', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data === 'success') {
+            showModal('Envío Correcto', 'El archivo se ha enviado correctamente.');
+        } else {
+            showModal('Fallo el Envío', data);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showModal('Fallo el Envío', 'Ocurrió un error al enviar el archivo.');
+    });
+});
+
+function showModal(title, message) {
+    document.getElementById('responseModalLabel').innerText = title;
+    document.getElementById('responseMessage').innerText = message;
+    $('#responseModal').modal('show');
+}
+// Mostrar el nombre del archivo seleccionado
+      function updateFileName() {
+          const input = document.getElementById('excelFile');
+          const fileNameDisplay = document.getElementById('fileName');
+          const fileName = input.files.length > 0 ? input.files[0].name : '';
+          fileNameDisplay.textContent = fileName ? `Archivo seleccionado: ${fileName}` : '';
+      }
+
+      // Lógica de arrastrar y soltar archivos
+      const dropArea = document.getElementById('fileDropArea');
+
+      dropArea.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          dropArea.classList.add('dragging');
+      });
+
+      dropArea.addEventListener('dragleave', () => {
+          dropArea.classList.remove('dragging');
+      });
+
+      dropArea.addEventListener('drop', (e) => {
+          e.preventDefault();
+          dropArea.classList.remove('dragging');
+
+          const input = document.getElementById('excelFile');
+          const file = e.dataTransfer.files[0];
+
+          if (file && (file.type === "application/vnd.ms-excel" || file.type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")) {
+              input.files = e.dataTransfer.files;
+              updateFileName();
+          } else {
+              alert('Por favor, sube un archivo Excel válido (.xls o .xlsx).');
+          }
+      });
